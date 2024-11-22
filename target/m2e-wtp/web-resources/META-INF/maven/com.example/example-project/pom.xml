@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- プロジェクトの基本情報 -->
+	<groupId>com.example</groupId>  <!-- グループID（プロジェクトのパッケージ名など） -->
+	<artifactId>example-project</artifactId>  <!-- アーティファクトID（プロジェクト名） -->
+	<version>1.0.0</version>  <!-- プロジェクトのバージョン -->
+	<packaging>war</packaging>  <!-- パッケージタイプ。warはWebアプリケーション用 -->
+
+	<!-- プロジェクトのビルド設定 -->
+	<build>
+		<plugins>
+			<!-- コンパイラープラグイン設定 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version> <!-- 最新バージョンを使用 -->
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+
+			<!-- WARプラグイン設定 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<!-- webapp-runnerの依存関係をコピーする設定 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase> <!-- パッケージフェーズで実行 -->
+						<goals>
+							<goal>copy</goal> <!-- ファイルをコピーするゴール -->
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.heroku</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>9.0.97.0</version> <!--
+									使用するwebapp-runnerのバージョン -->
+									<destFileName>webapp-runner.jar</destFileName> <!--
+									コピーするファイル名 -->
+									<outputDirectory>
+										${project.build.directory}/dependency</outputDirectory> <!--
+									依存関係の出力先 -->
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<!-- プロジェクトの依存関係 -->
+	<dependencies>
+		<!-- Jakarta Servlet API -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>  <!-- Jakarta Servlet APIのバージョン -->
+			<scope>provided</scope>  <!-- サーバーが提供するため、コンパイル時にのみ使用 -->
+		</dependency>
+
+		<!-- Jakarta JSP API -->
+		<dependency>
+			<groupId>jakarta.servlet.jsp</groupId>
+			<artifactId>jakarta.servlet.jsp-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- PostgreSQL JDBCドライバ -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.5.0</version>  <!-- 使用するPostgreSQLのバージョン -->
+		</dependency>
+
+	</dependencies>
+
+	<!-- プロジェクトのプロパティ -->
+	<properties>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
+</project>

@@ -1,0 +1,1 @@
+web: java -jar example-project-1.0.0.war

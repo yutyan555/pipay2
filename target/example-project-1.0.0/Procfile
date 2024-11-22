@@ -1,0 +1,1 @@
+web: java -cp target/*:target/WEB-INF/lib/* -jar target/WEB-INF/lib/webapp-runner.jar your-app-name.war

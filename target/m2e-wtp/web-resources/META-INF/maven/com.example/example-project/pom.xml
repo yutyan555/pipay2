@@ -49,13 +49,10 @@
 								<artifactItem>
 									<groupId>com.heroku</groupId>
 									<artifactId>webapp-runner</artifactId>
-									<version>9.0.97.0</version> <!--
-									使用するwebapp-runnerのバージョン -->
-									<destFileName>webapp-runner.jar</destFileName> <!--
-									コピーするファイル名 -->
+									<version>9.0.97.0</version> <!-- 使用するwebapp-runnerのバージョン -->
+									<destFileName>webapp-runner.jar</destFileName> <!-- コピーするファイル名 -->
 									<outputDirectory>
-										${project.build.directory}/dependency</outputDirectory> <!--
-									依存関係の出力先 -->
+										${project.build.directory}/dependency</outputDirectory> <!-- 依存関係の出力先 -->
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -97,5 +94,6 @@
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		<tomcat.version>9.0.43</tomcat.version> <!-- Tomcatのバージョン -->
 	</properties>
 </project>
